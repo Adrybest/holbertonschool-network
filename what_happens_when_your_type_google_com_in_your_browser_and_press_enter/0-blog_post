@@ -1,0 +1,73 @@
+What Happens When You Type https://www.google.com and Press Enter?
+The journey from typing a URL to seeing a webpage unfold involves multiple interconnected systems. This blog breaks down the process into key steps, highlighting the role of DNS, TCP/IP, HTTPS/SSL, load balancers, servers, and databases.
+
+1. DNS Resolution
+
+When you type https://www.google.com in the browser and hit Enter, the first step is translating the domain name into an IP address:
+The browser checks its local DNS cache for the IP address of www.google.com.
+If not found, the query is sent to the operating system's DNS resolver, which may consult:
+Local DNS cache.
+DNS server set by your ISP or a custom DNS service like Google DNS or Cloudflare.
+The DNS server recursively queries other DNS servers until it retrieves the IP address of www.google.com.
+Example Result: 142.250.190.206
+
+2. Establishing a TCP/IP Connection
+
+With the IP address in hand, the browser establishes a connection to the server using the Transmission Control Protocol (TCP) over the Internet Protocol (IP).
+A three-way handshake occurs:
+SYN: The client sends a synchronization request.
+SYN-ACK: The server acknowledges and sends its own synchronization request.
+ACK: The client acknowledges the server's request.
+This process ensures a reliable connection.
+
+3. Firewall Checks
+
+Firewalls along the route examine the packet headers to ensure they comply with security policies. Firewalls protect against malicious traffic and unauthorized access:
+Network firewalls filter packets based on IP, port, or protocol.
+Application firewalls may inspect HTTP requests for suspicious payloads.
+
+4. HTTPS/SSL Handshake
+
+Since the URL starts with https://, the connection must be encrypted using SSL/TLS (Secure Sockets Layer/Transport Layer Security).
+The browser requests the server's SSL certificate to verify its authenticity.
+A handshake negotiates the encryption algorithms and establishes a shared session key.
+The secure connection is established, ensuring data confidentiality and integrity.
+
+5. Load Balancer
+
+The request reaches Google's load balancer, which distributes incoming traffic across multiple servers to optimize performance and prevent overloading.
+Load balancers may use algorithms like round-robin, least connections, or geographic proximity.
+They can operate at Layer 4 (TCP/UDP) or Layer 7 (HTTP/HTTPS) of the OSI model.
+
+6. Web Server
+
+The load balancer routes the request to an available web server.
+Common web servers include Apache, Nginx, or proprietary Google technologies.
+The web server processes the request and forwards it to the application server for dynamic content generation.
+
+7. Application Server
+
+The application server handles the core business logic.
+In Google's case, this could involve running services written in programming languages like Python, Java, or Go.
+The server processes the request, often consulting a database or other back-end services for data.
+
+8. Database Query
+
+For dynamic content, the application server queries a database to retrieve the necessary information.
+Google may use highly optimized, distributed databases capable of handling billions of queries daily.
+Database systems like Bigtable or Spanner store and retrieve the data efficiently.
+
+9. Returning the Response
+
+Once the data is fetched and the response is generated:
+The application server sends it back to the web server.
+The web server formats it into an HTTP response.
+The response is sent back through the load balancer to the client.
+
+10. Rendering the Webpage
+
+The browser receives the response and begins rendering the page:
+Parses the HTML to build the DOM (Document Object Model).
+Fetches additional resources (CSS, JavaScript, images) as needed.
+Executes JavaScript to handle interactivity.
+Renders the final visual content on the screen.
